@@ -70,8 +70,42 @@ public:
 		return *this;
 	}
 
-	// Todo: 이동 생성자.
-	// Todo: 이동 대입 연산자.
+	// 이동 생성자.
+	List(List&& other)
+		: size(other.size),
+		capacity(other.capacity),
+		data(other.data)
+	{
+		// other 정리.
+		other.data = nullptr;
+		other.size = 0;
+		other.capacity = 0;
+	}
+
+	// 이동 대입 연산자.
+	List& operator=(List&& other)
+	{
+		// 예외 처리.
+		if (this == &other)
+		{
+			return *this;
+		}
+
+		// 기존 데이터 제거.
+		delete[] data;
+
+		// 복사 처리.
+		data = other.data;
+		size = other.size;
+		capacity = other.capacity;
+
+		// other 값 정리.
+		other.data = nullptr;
+		other.size = 0;
+		other.capacity = 0;
+
+		return *this;
+	}
 
 	// 맨 마지막 위치에 데이터 추가하는 함수.
 	void PushBack(const T& value)
