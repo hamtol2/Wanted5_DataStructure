@@ -153,7 +153,7 @@ private:
 	void ReAllocate(int newCapacity)
 	{
 		// #1. 새로운 공간 할당.
-		T* newBlock = new int[newCapacity] {};
+		T* newBlock = new T[newCapacity] {};
 
 		// #2. 기존 데이터 가져와서 저장.
 		for (int ix = 0; ix < size; ++ix)
