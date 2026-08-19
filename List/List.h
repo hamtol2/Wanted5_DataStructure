@@ -1,8 +1,11 @@
 ﻿#pragma once
 
+#include <iostream>
 #include <cassert>
 
 // 템플릿 동적 배열 클래스.
+// 템플릿은 왜 header와 cpp로 구분해서 구현하지 않나요?
+// 템플릿은 추론(해석) 시점이 컴파일 시간이기 때문.
 template<typename T>
 class List
 {
@@ -113,7 +116,7 @@ public:
 		// #1. 저장공간이 가득찼으면 재할당.
 		if (size == capacity)
 		{
-			int newCapacity = capacity == 0 ? 
+			int newCapacity = capacity == 0 ?
 				defaultSize : capacity * scale;
 			ReAllocate(newCapacity);
 		}
@@ -181,6 +184,10 @@ public:
 
 	// 배열이 비어있는지 확인하는 함수.
 	bool Empty() const { return size == 0; }
+
+	// 범위 기반 루프 사용 가능하도록 추가.
+	T* begin() const { return data; }
+	T* end() const { return data + size; }
 
 private:
 	// 재할당 메소드.
