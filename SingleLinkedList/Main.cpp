@@ -1,8 +1,12 @@
 ﻿#include "LinkedList.h"
 #include <iostream>
+#include <list>
+#include <forward_list>
 
 int main()
 {
+	std::list<int> testList;
+
 	LinkedList<int> list;
 	list.AddToHead(30);
 	list.AddToHead(20);
