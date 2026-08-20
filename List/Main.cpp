@@ -26,4 +26,13 @@ int main()
 	{
 		std::cout << value << "\n";
 	}
+
+	// 이터레이터 기반 루프 순회.
+	// 뭐하러 구현? -> STL이 이터레이터를 구현한 이유.
+	for (auto iterator = characterList.begin();
+		iterator != characterList.end();
+		++iterator)
+	{
+		std::cout << (*iterator) << "\n";
+	}
 }
