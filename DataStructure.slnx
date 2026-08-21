@@ -5,6 +5,7 @@
   <Project Path="Array/Array.vcxproj" Id="f61075fe-93cb-4fa8-b58d-255474f41c4a" />
   <Project Path="List/List.vcxproj" Id="5a1e8980-a641-450e-864d-17e5e440ae22" />
   <Project Path="Queue/Queue.vcxproj" Id="41e5408e-c386-4f68-805a-8fa1ccff4e3c" />
+  <Project Path="QueueMaze/QueueMaze.vcxproj" Id="55de918e-dc6d-480a-966f-27582b70dbd8" />
   <Project Path="SingleLinkedList/SingleLinkedList.vcxproj" Id="2d7a98f1-8fcc-4912-9e04-6407f29397bf" />
   <Project Path="Stack/Stack.vcxproj" Id="f61c7e25-c427-469f-8a7f-d683fc0f7ce8" />
   <Project Path="StackMaze/StackMaze.vcxproj" Id="37e4cc67-66e8-4a98-886c-c6e80b7853c5" />
