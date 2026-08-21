@@ -4,6 +4,7 @@
   </Configurations>
   <Project Path="Array/Array.vcxproj" Id="f61075fe-93cb-4fa8-b58d-255474f41c4a" />
   <Project Path="Deque/Deque.vcxproj" Id="a436a88e-f3e5-4439-a3e1-d9c4b9728cd2" />
+  <Project Path="HashTable/HashTable.vcxproj" Id="cbfb85a4-2746-45e8-b902-8ff5cc72ce18" />
   <Project Path="List/List.vcxproj" Id="5a1e8980-a641-450e-864d-17e5e440ae22" />
   <Project Path="Queue/Queue.vcxproj" Id="41e5408e-c386-4f68-805a-8fa1ccff4e3c" />
   <Project Path="QueueMaze/QueueMaze.vcxproj" Id="55de918e-dc6d-480a-966f-27582b70dbd8" />
