@@ -1,5 +1,14 @@
 ﻿#include "HashTable.h"
 #include <cstdint>
+#include <iostream>
+
+#ifdef _DEBUG
+#define new new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+// Replace _NORMAL_BLOCK with _CLIENT_BLOCK if you want the
+// allocations to be of _CLIENT_BLOCK type
+#else
+#define new new
+#endif
 
 HashTable::HashTable()
 {
@@ -101,28 +110,107 @@ bool HashTable::Delete(const std::string& key)
 
 bool HashTable::Find(const std::string& key, std::string& outValue) const
 {
+    // 버킷 인덱스 가져오기.
+    int bucketIndex = GenerateBucketIndex(key);
+    const Entry* current = table[bucketIndex];
+
+    // 키 검색.
+    while (current)
+    {
+        // 같은 키를 찾으면 출력 및 반환.
+        if (current->key == key)
+        {
+            outValue = current->value;
+            return true;
+        }
+
+        // 아직 못 찾았으면 다음 데이터 검색.
+        current = current->next;
+    }
+
+    // 모두 찾았는데 키를 못 찾았으면 실패.
     return false;
 }
 
 bool HashTable::Contains(const std::string& key) const
 {
-    return false;
+    std::string value;
+    return Find(key, value);
 }
 
 void HashTable::Clear()
-{}
+{
+    // 모든 버킷을 순회하면서 초기화 진행.
+    for (int ix = 0; ix < bucketCount; ++ix)
+    {
+        // 제거할 버킷에 접근.
+        Entry* current = table[ix];
+
+        // 버킷을 순회하면서 제거 진행.
+        while (current)
+        {
+            // 제거를 위해 임시 저장.
+            Entry* deleteEntry = current;
+            current = current->next;
+
+            delete deleteEntry;
+            deleteEntry = nullptr;
+        }
+
+        // 버킷 null로 초기화.
+        table[ix] = nullptr;
+    }
+
+    // 저장된 데이터 수 초기화.
+    count = 0;
+}
 
 void HashTable::Print() const
-{}
+{
+    // 버킷 순회.
+    for (int ix = 0; ix < bucketCount; ++ix)
+    {
+        // 2차 자료구조인 버킷(링크드리스트)에 접근.
+        const Entry* current = table[ix];
+
+        // 연결 리스트에 저장된 데이터가 없으면 건너뛰기.
+        if (!current)
+        {
+            continue;
+        }
+
+        // 버킷 인덱스 출력.
+        std::cout << "[" << ix << "] ";
+
+        // 연결 리스트 순회하면서 출력.
+        while (current)
+        {
+            std::cout 
+                << "(" << current->key << "," << current->value << ")";
+
+            // 출력 후 다음 인덱스로 넘어감.
+            current = current->next;
+
+            // 다음 인덱스가 있으면 -> 출력.
+            if (current)
+            {
+                std::cout << " -> ";
+            }
+        }
+
+        // 개행 출력.
+        std::cout << "\n";
+    }
+}
 
 bool HashTable::IsEmpty() const
 {
-    return false;
+    return count == 0;
 }
 
 int HashTable::Count() const
 {
-    return 0;
+    return count;
 }
 
 int HashTable::GenerateBucketIndex(const std::string& key) const
