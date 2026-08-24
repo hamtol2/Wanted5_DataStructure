@@ -2,6 +2,7 @@
 
 #include "Node.h"
 #include <algorithm>
+#include <iostream>
 
 template<typename T>
 class Tree
@@ -94,7 +95,73 @@ public:
 		return true;
 	}
 
+	// 전위 순회(Preorder).
+	void PreorderTraverse() const
+	{
+		// 재귀적으로 하위 노드 방문.
+		PreorderRecursive(root, 0);
+	}
+
+	// 후위 순회(Postorder).
+	void PostorderTraverse() const
+	{
+		// 재귀적으로 하위 노드 방문.
+		PostorderRecursive(root, 0);
+	}
+
 private:
+	// 전위 순회 재귀 함수.
+	void PreorderRecursive(const Node<T>* node, int depth) const
+	{
+		// 종료 조건.
+		if (!node)
+		{
+			return;
+		}
+
+		// 부모(현재) 노드를 먼저 처리.
+		// 깊이를 보여주기 위해 빈칸 출력.
+		for (int ix = 0; ix < depth; ++ix)
+		{
+			std::cout << "  ";
+		}
+
+		std::cout << node->data << "\n";
+
+		// 순서대로 자손 노드 방문 처리.
+		const int count = static_cast<int>(node->children.size());
+		for (int ix = 0; ix < count; ++ix)
+		{
+			PreorderRecursive(node->children[ix], depth + 1);
+		}
+	}
+
+	// 후위 순회 재귀 함수.
+	void PostorderRecursive(const Node<T>* node, int depth) const
+	{
+		// 종료 조건.
+		if (!node)
+		{
+			return;
+		}
+
+		// 순서대로 자손 노드 방문 처리.
+		const int count = static_cast<int>(node->children.size());
+		for (int ix = 0; ix < count; ++ix)
+		{
+			PostorderRecursive(node->children[ix], depth + 1);
+		}
+
+		// 자손을 모두 방문한 뒤에 부모(현재) 노드를 처리.
+		// 깊이를 보여주기 위해 빈칸 출력.
+		for (int ix = 0; ix < depth; ++ix)
+		{
+			std::cout << "  ";
+		}
+
+		std::cout << node->data << "\n";
+	}
+
 	// 재귀적으로 탐색하는 함수.
 	// #1 종료 조건을 잘 설정.
 	// #2 재귀 함수를 호출하면서 데이터 범위가 변경되어야 함.
