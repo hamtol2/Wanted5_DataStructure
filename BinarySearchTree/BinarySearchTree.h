@@ -15,7 +15,9 @@ public:
 	~BinarySearchTree()
 	{
 		// 루트 노드를 삭제하면, 재귀적으로 하위 노드도 제거.
-		SafeDelete(root);
+		//SafeDelete(root);
+		delete root;
+		root = nullptr;
 	}
 
 	// 트리가 비었는지 확인하는 함수.
