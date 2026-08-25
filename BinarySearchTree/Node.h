@@ -23,7 +23,8 @@ class Node
 	friend class BinarySearchTree<T>;
 
 public:
-
+	// Getter.
+	const T& GetData() const { return data; }
 
 private:
 	Node(const T& data)
