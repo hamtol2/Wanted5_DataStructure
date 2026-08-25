@@ -94,7 +94,57 @@ public:
 	// 최댓값 반환 함수.
 	bool Maximum(T& outValue) const
 	{
+		// 트리가 비었으면 검색 실패.
+		if (!root)
+		{
+			return false;
+		}
 
+		// 루트부터 검색 시작.
+		const Node<T>* current = root;
+
+		// 가장 오른쪽 끝까지 이동.
+		while (current->right)
+		{
+			current = current->right;
+		}
+
+		// 가장 오른쪽 끝에 위치한 노드 값 반환.
+		outValue = current->data;
+		return true;
+	}
+
+	// 검색 함수.
+	bool Find(const T& data) const
+	{
+		// 루트 노드부터 검색 시작.
+		const Node<T>* current = root;
+
+		while (current)
+		{
+			// 현재 노드의 데이터가 검색하려는 데이터보다 작으면,
+			// 오른쪽 하위 트리로 검색 이어감.
+			if (current->data < data)
+			{
+				current = current->right;
+			}
+
+			// 현재 노드의 데이터가 검색 데이터보다 크면,
+			// 왼쪽 하위 트리로 검색 이어감.
+			else if (data < current->data)
+			{
+				current = current->left;
+			}
+
+			// 검색 성공.
+			else
+			{
+				return true;
+			}
+		}
+
+		// 노드를 모두 찾아봤는데 여기까지 왔으면 검색 실패.
+		return false;
 	}
 
 private:
